@@ -1,6 +1,6 @@
 package com.test.cppsurfaceviewtrans;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.RelativeLayout;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

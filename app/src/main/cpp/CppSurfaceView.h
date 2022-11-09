@@ -7,19 +7,6 @@
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-JNIEXPORT void JNICALL Java_com_test_cppsurfaceviewtrans_NativeFunc_create(JNIEnv *env, jclass type, jint id);
-JNIEXPORT void JNICALL Java_com_test_cppsurfaceviewtrans_NativeFunc_surfaceCreated(JNIEnv *env, jclass type, jint id, jobject surface);
-JNIEXPORT void JNICALL Java_com_test_cppsurfaceviewtrans_NativeFunc_surfaceChanged(JNIEnv *env, jclass type, jint id, jint width, jint height);
-JNIEXPORT void JNICALL Java_com_test_cppsurfaceviewtrans_NativeFunc_surfaceDestroyed(JNIEnv *env, jclass type, jint id);
-
-#ifdef __cplusplus
-}
-#endif
-
 class CppSurfaceView {
 private:
     const char *VERTEXSHADER =

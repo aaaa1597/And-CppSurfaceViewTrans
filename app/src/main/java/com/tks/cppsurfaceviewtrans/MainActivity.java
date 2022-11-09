@@ -1,26 +1,30 @@
-package com.test.cppsurfaceviewtrans;
+package com.tks.cppsurfaceviewtrans;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.graphics.PixelFormat;
-import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.tks.cppsurfaceviewtrans.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        SurfaceView surface = ((SurfaceView)findViewById(R.id.surface));
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        SurfaceView surface = binding.surfaceview;;
         /* 透過設定 */
         surface.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         surface.setZOrderOnTop(true);
+
 
         /* コールバック設定 */
         surface.getHolder().addCallback(new SurfaceHolder.Callback() {
@@ -41,6 +45,5 @@ public class MainActivity extends AppCompatActivity {
                 NativeFunc.surfaceDestroyed(0);
             }
         });
-
     }
 }

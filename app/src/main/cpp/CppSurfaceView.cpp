@@ -1,3 +1,5 @@
+#include <jni.h>
+#include <string>
 #include <map>
 #include <jni.h>
 #include <android/log.h>
@@ -10,21 +12,21 @@ std::map<int, CppSurfaceView*> gpSufacesLists;
 extern "C" {
 #endif
 
-void Java_com_test_cppsurfaceviewtrans_NativeFunc_create(JNIEnv *pEnv, jclass type, jint id) {
+JNIEXPORT void JNICALL Java_com_tks_cppsurfaceviewtrans_NativeFunc_create(JNIEnv *env, jclass clazz, jint id) {
     gpSufacesLists[id] = new CppSurfaceView(id);
 }
 
-void Java_com_test_cppsurfaceviewtrans_NativeFunc_surfaceCreated(JNIEnv *pEnv, jclass type, jint id, jobject surface) {
-    gpSufacesLists[id]->createThread(pEnv, surface);
+JNIEXPORT void JNICALL Java_com_tks_cppsurfaceviewtrans_NativeFunc_surfaceCreated(JNIEnv *env, jclass clazz, jint id, jobject surface) {
+    gpSufacesLists[id]->createThread(env, surface);
 }
 
-void Java_com_test_cppsurfaceviewtrans_NativeFunc_surfaceChanged(JNIEnv *pEnv, jclass type, jint id, jint width, jint height) {
+JNIEXPORT void JNICALL Java_com_tks_cppsurfaceviewtrans_NativeFunc_surfaceChanged(JNIEnv *env, jclass clazz, jint id, jint width, jint height) {
     gpSufacesLists[id]->isSurfaceCreated = true;
     gpSufacesLists[id]->DspW = width;
     gpSufacesLists[id]->DspH = height;
 }
 
-void Java_com_test_cppsurfaceviewtrans_NativeFunc_surfaceDestroyed(JNIEnv *pEnv, jclass type, jint id) {
+JNIEXPORT void JNICALL Java_com_tks_cppsurfaceviewtrans_NativeFunc_surfaceDestroyed(JNIEnv *env, jclass clazz, jint id) {
     gpSufacesLists[id]->mStatus = CppSurfaceView::STATUS_FINISH;
     gpSufacesLists[id]->destroy();
 }
@@ -229,10 +231,10 @@ void CppSurfaceView::drawGL() {
         if((mxPos > (2*DspW)) || (mxPos < 0)) mMoveX = -mMoveX;
         if((myPos > (2*DspH)) || (myPos < 0)) mMoveY = -mMoveY;
         float translateMatrix[] = {
-            1,0,0,0,
-            0,1,0,0,
-            0,0,1,0,
-            mxPos/DspW-1, myPos/DspH-1, 1, 1
+                1,0,0,0,
+                0,1,0,0,
+                0,0,1,0,
+                mxPos/DspW-1, myPos/DspH-1, 1, 1
         };
         glUniformMatrix4fv(mu_rotMatrixHandle, 1, false, translateMatrix);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);

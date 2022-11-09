@@ -1,4 +1,4 @@
-package com.test.cppsurfaceviewtrans;
+package com.tks.cppsurfaceviewtrans;
 
 import android.view.Surface;
 
